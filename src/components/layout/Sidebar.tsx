@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         <div className="px-6 py-4 bg-blue-700">
           <div className="flex items-center">
             <Clock className="h-8 w-8" />
-            <span className="ml-2 text-xl font-bold">TimeSync</span>
+            <span className="ml-2 text-xl font-bold">Team Calendar</span>
           </div>
         </div>
         
@@ -114,7 +114,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         
         {/* Footer */}
         <div className="px-6 py-4 bg-blue-700">
-          <p className="text-xs text-blue-200">TimeSync v1.0.0</p>
+          <p className="text-xs text-blue-200">Team Calendar v1.0.0</p>
         </div>
       </div>
     </aside>

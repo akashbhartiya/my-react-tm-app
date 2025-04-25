@@ -53,7 +53,7 @@ const Login: React.FC = () => {
         <div className="px-6 py-8 sm:px-10 sm:py-12">
           <div className="flex items-center justify-center mb-6">
             <Clock className="h-10 w-10 text-blue-600" />
-            <h1 className="ml-2 text-3xl font-bold text-gray-800">TimeSync</h1>
+            <h1 className="ml-2 text-3xl font-bold text-gray-800">Team Calendar</h1>
           </div>
           
           <h2 className="text-center text-2xl font-medium text-gray-900 mb-8">

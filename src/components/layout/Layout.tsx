@@ -40,7 +40,7 @@ const Layout: React.FC = () => {
               >
                 {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
-              <h1 className="ml-4 lg:ml-0 text-xl font-semibold text-gray-800">TimeSync</h1>
+              <h1 className="ml-4 lg:ml-0 text-xl font-semibold text-gray-800">Team Calendar</h1>
             </div>
             
             <div className="flex items-center">

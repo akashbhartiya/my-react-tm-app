@@ -8,24 +8,24 @@ export type LeaveStatus = 'pending' | 'approved' | 'rejected';
 
 export interface LeaveRequest {
   id: string;
-  userId: string;
-  userName: string;
-  userTeam: string;
-  leaveType: LeaveType;
-  startDate: string;
-  endDate: string;
+  user_id: string;
+  user_name: string;
+  user_team: string;
+  leave_type: LeaveType;
+  start_date: string;
+  end_date: string;
   status: LeaveStatus;
   reason?: string;
-  managerComment?: string;
-  createdAt: string;
-  updatedAt: string;
+  manager_comment?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface LeaveContextType {
   leaveRequests: LeaveRequest[];
   userLeaveRequests: LeaveRequest[];
   pendingLeaveRequests: LeaveRequest[];
-  createLeaveRequest: (data: Omit<LeaveRequest, 'id' | 'userId' | 'userName' | 'userTeam' | 'status' | 'createdAt' | 'updatedAt'>) => Promise<void>;
+  createLeaveRequest: (data: Omit<LeaveRequest, 'id' | 'user_id' | 'user_name' | 'user_team' | 'status' | 'created_at' | 'updated_at'>) => Promise<void>;
   updateLeaveRequest: (id: string, status: LeaveStatus, comment?: string) => Promise<void>;
   getUserLeaveHistory: (userId: string) => LeaveRequest[];
   getLeavesByDateRange: (startDate: string, endDate: string) => LeaveRequest[];
@@ -60,6 +60,7 @@ export const LeaveProvider: React.FC<{children: ReactNode}> = ({ children }) => 
       try {
         if (isManager()) {
           const allLeaves = await leaves.getAll();
+          console.log('All leave requests:', allLeaves);
           setLeaveRequests(allLeaves);
         } else {
           const myLeaves = await leaves.getMyLeaves();
@@ -78,7 +79,7 @@ export const LeaveProvider: React.FC<{children: ReactNode}> = ({ children }) => 
 
   // Get leave requests for current user
   const userLeaveRequests = currentUser 
-    ? leaveRequests.filter(request => request.userId === currentUser.id)
+    ? leaveRequests.filter(request => request.user_id === currentUser.id)
     : [];
 
   // Get pending leave requests (for managers)
@@ -93,9 +94,9 @@ export const LeaveProvider: React.FC<{children: ReactNode}> = ({ children }) => 
     
     try {
       await leaves.create({
-        leaveType: data.leaveType,
-        startDate: data.startDate,
-        endDate: data.endDate,
+        leaveType: data.leave_type,
+        startDate: data.start_date,
+        endDate: data.end_date,
         reason: data.reason,
       });
       
@@ -149,7 +150,7 @@ export const LeaveProvider: React.FC<{children: ReactNode}> = ({ children }) => 
 
   // Get leave history for a specific user
   const getUserLeaveHistory = (userId: string) => {
-    return leaveRequests.filter(request => request.userId === userId);
+    return leaveRequests.filter(request => request.user_id === userId);
   };
 
   // Get leaves within a date range
@@ -160,7 +161,7 @@ export const LeaveProvider: React.FC<{children: ReactNode}> = ({ children }) => 
       
       // Check if leave period overlaps with the specified date range
       return (
-        (request.startDate <= endDate && request.endDate >= startDate)
+        (request.start_date <= endDate && request.end_date >= startDate)
       );
     });
   };

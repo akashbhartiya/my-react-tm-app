@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
   
   // User's upcoming leave requests
   const userUpcomingLeaves = userLeaveRequests.filter(
-    request => new Date(request.startDate) >= today
+    request => new Date(request.start_date) >= today
   );
   
   return (
@@ -108,14 +108,14 @@ const Dashboard: React.FC = () => {
                     <img
                       className="h-10 w-10 rounded-full object-cover"
                       src={`https://i.pravatar.cc/150?img=${parseInt(leave.userId)}`}
-                      alt={leave.userName}
+                      alt={leave.user_name}
                     />
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-gray-900">{leave.userName}</p>
-                      <p className="text-xs text-gray-500">{leave.userTeam}</p>
+                      <p className="text-sm font-medium text-gray-900">{leave.user_name}</p>
+                      <p className="text-xs text-gray-500">{leave.user_team}</p>
                     </div>
-                    <span className={`ml-auto event-badge ${leave.leaveType}`}>
-                      {leave.leaveType.charAt(0).toUpperCase() + leave.leaveType.slice(1)}
+                    <span className={`ml-auto event-badge ${leave.leave_type}`}>
+                      {leave.leave_type.charAt(0).toUpperCase() + leave.leave_type.slice(1)}
                     </span>
                   </li>
                 ))}

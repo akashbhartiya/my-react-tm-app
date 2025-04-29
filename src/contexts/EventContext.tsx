@@ -47,6 +47,7 @@ const EventContext = createContext<EventContextType | undefined>(undefined);
 
 export const useEvent = () => {
   const context = useContext(EventContext);
+  console.log('useEvent context Akash:', context);
   if (context === undefined) {
     throw new Error('useEvent must be used within an EventProvider');
   }

@@ -135,10 +135,10 @@ const LeaveRequests: React.FC = () => {
       
       // Add notification for the requestor
       addNotification({
-        userId: selectedRequest.userId,
+        userId: selectedRequest.user_id,
         type: approved ? 'success' : 'info',
         title: 'Leave Request Update',
-        message: `Your ${selectedRequest.leaveType} leave request for ${new Date(selectedRequest.startDate).toLocaleDateString()} to ${new Date(selectedRequest.endDate).toLocaleDateString()} has been ${approved ? 'approved' : 'rejected'}.${comment ? ` Comment: ${comment}` : ''}`,
+        message: `Your ${selectedRequest.leave_type} leave request for ${new Date(selectedRequest.start_date).toLocaleDateString()} to ${new Date(selectedRequest.end_date).toLocaleDateString()} has been ${approved ? 'approved' : 'rejected'}.${comment ? ` Comment: ${comment}` : ''}`,
       });
       
       closeApprovalModal();
@@ -185,16 +185,16 @@ const LeaveRequests: React.FC = () => {
             {userLeaveRequests.map((request) => (
               <tr key={request.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`event-badge ${request.leaveType}`}>
-                    {request.leaveType.charAt(0).toUpperCase() + request.leaveType.slice(1)}
+                  <span className={`event-badge ${request.leave_type}`}>
+                    {request.leave_type.charAt(0).toUpperCase() + request.leave_type.slice(1)}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    {new Date(request.startDate).toLocaleDateString()} to {new Date(request.endDate).toLocaleDateString()}
+                    {new Date(request.start_date).toLocaleDateString()} to {new Date(request.end_date).toLocaleDateString()}
                   </div>
                   <div className="text-xs text-gray-500">
-                    {Math.round((new Date(request.endDate).getTime() - new Date(request.startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1} day(s)
+                    {Math.round((new Date(request.end_date).getTime() - new Date(request.start_date).getTime()) / (1000 * 60 * 60 * 24)) + 1} day(s)
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -203,10 +203,10 @@ const LeaveRequests: React.FC = () => {
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(request.createdAt).toLocaleDateString()}
+                  {new Date(request.created_at).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
-                  {request.managerComment || '-'}
+                  {request.manager_comment || '-'}
                 </td>
               </tr>
             ))}
@@ -259,38 +259,38 @@ const LeaveRequests: React.FC = () => {
                     <div className="flex-shrink-0 h-8 w-8">
                       <img 
                         className="h-8 w-8 rounded-full" 
-                        src={`https://i.pravatar.cc/150?img=${parseInt(request.userId)}`}
-                        alt={request.userName} 
+                        src={`https://i.pravatar.cc/150?img=${parseInt(request.user_id)}`}
+                        alt={request.user_name} 
                       />
                     </div>
                     <div className="ml-4">
                       <div className="text-sm font-medium text-gray-900">
-                        {request.userName}
+                        {request.user_name}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {request.userTeam}
+                        {request.user_team}
                       </div>
                     </div>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className={`event-badge ${request.leaveType}`}>
-                    {request.leaveType.charAt(0).toUpperCase() + request.leaveType.slice(1)}
+                  <span className={`event-badge ${request.leave_type}`}>
+                    {request.leave_type.charAt(0).toUpperCase() + request.leave_type.slice(1)}
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    {new Date(request.startDate).toLocaleDateString()} to {new Date(request.endDate).toLocaleDateString()}
+                    {new Date(request.start_date).toLocaleDateString()} to {new Date(request.end_date).toLocaleDateString()}
                   </div>
                   <div className="text-xs text-gray-500">
-                    {Math.round((new Date(request.endDate).getTime() - new Date(request.startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1} day(s)
+                    {Math.round((new Date(request.end_date).getTime() - new Date(request.start_date).getTime()) / (1000 * 60 * 60 * 24)) + 1} day(s)
                   </div>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
                   {request.reason || '-'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {new Date(request.createdAt).toLocaleDateString()}
+                  {new Date(request.created_at).toLocaleDateString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button
@@ -443,20 +443,20 @@ const LeaveRequests: React.FC = () => {
             <div className="px-6 py-4">
               <div className="mb-4">
                 <p className="text-sm text-gray-600 mb-1">Employee:</p>
-                <p className="font-medium">{selectedRequest.userName}</p>
+                <p className="font-medium">{selectedRequest.user_name}</p>
               </div>
               
               <div className="mb-4">
                 <p className="text-sm text-gray-600 mb-1">Leave Type:</p>
-                <p className="font-medium">{selectedRequest.leaveType.charAt(0).toUpperCase() + selectedRequest.leaveType.slice(1)}</p>
+                <p className="font-medium">{selectedRequest.leave_type.charAt(0).toUpperCase() + selectedRequest.leave_type.slice(1)}</p>
               </div>
               
               <div className="mb-4">
                 <p className="text-sm text-gray-600 mb-1">Dates:</p>
                 <p className="font-medium">
-                  {new Date(selectedRequest.startDate).toLocaleDateString()} to {new Date(selectedRequest.endDate).toLocaleDateString()}
+                  {new Date(selectedRequest.start_date).toLocaleDateString()} to {new Date(selectedRequest.end_date).toLocaleDateString()}
                   <span className="text-sm font-normal text-gray-500 ml-2">
-                    ({Math.round((new Date(selectedRequest.endDate).getTime() - new Date(selectedRequest.startDate).getTime()) / (1000 * 60 * 60 * 24)) + 1} day(s))
+                    ({Math.round((new Date(selectedRequest.end_date).getTime() - new Date(selectedRequest.start_date).getTime()) / (1000 * 60 * 60 * 24)) + 1} day(s))
                   </span>
                 </p>
               </div>

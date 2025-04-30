@@ -107,7 +107,7 @@ const Dashboard: React.FC = () => {
                   <li key={leave.id} className="py-4 flex items-center">
                     <img
                       className="h-10 w-10 rounded-full object-cover"
-                      src={`https://i.pravatar.cc/150?img=${parseInt(leave.userId)}`}
+                      src={`https://i.pravatar.cc/150?img=${parseInt(leave.user_id)}`}
                       alt={leave.user_name}
                     />
                     <div className="ml-3">

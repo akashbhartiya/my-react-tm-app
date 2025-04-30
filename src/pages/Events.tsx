@@ -280,7 +280,7 @@ const Events: React.FC = () => {
     
     // Get user's RSVP status
     const rsvpStatus = getRsvpStatus(event.id);
-    
+    console.log('akash-----------------')
     return (
       <div key={event.id} className="bg-white rounded-lg shadow-sm hover:shadow overflow-hidden transition-shadow duration-300">
         <div className="px-6 py-4">
